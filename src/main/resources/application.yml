@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: blog-api
+  datasource:
+    url: jdbc:postgresql://localhost:5432/blogdb
+    username: bloguser
+    password: blogpass
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+      show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  web:
+    resources:
+      static-locations: file:uploads/
+
+server:
+  port: 8000
+  servlet:
+    context-path: /api
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:yourSuperSecretKeyForJWTGenerationWithMinimum32Characters}
+    expiration: 86400000 # 24 hours
+  upload:
+    path: ./uploads/
+
+logging:
+  level:
+    com.blog: DEBUG
+    org.springframework.security: DEBUG
